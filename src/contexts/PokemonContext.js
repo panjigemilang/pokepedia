@@ -3,22 +3,19 @@ import { createContext, useState } from "react"
 export const PokemonContext = createContext()
 
 const PokemonContextProvider = (props) => {
-  const [pokemons, setPokemons] = useState([])
   const [pokemon, setPokemon] = useState({})
-  const [isFetchingPokemons, setIsFetchingPokemons] = useState(false)
-  const [isFetchingPokemon, setIsFetchingPokemon] = useState(false)
+  const [isCatching, setIsCatching] = useState(false)
+  const [selected, setSelected] = useState(false)
 
   return (
     <PokemonContext.Provider
       value={{
-        pokemons,
-        setPokemons,
         pokemon,
         setPokemon,
-        isFetchingPokemons,
-        setIsFetchingPokemons,
-        isFetchingPokemon,
-        setIsFetchingPokemon,
+        isCatching,
+        setIsCatching,
+        selected,
+        setSelected,
       }}
     >
       {props.children}

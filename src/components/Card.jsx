@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "@emotion/styled"
 import { LazyLoadImage } from "react-lazy-load-image-component"
+import { PokemonContext } from "../contexts/PokemonContext"
 
 const App = styled.div`
   min-height: 8rem;
@@ -72,10 +73,16 @@ export default function Card({
   name,
   width = "",
 }) {
+  const { setSelected, setPokemon } = useContext(PokemonContext)
+  const selectedPokemon = (name) => {
+    setSelected(true)
+    setPokemon((prevState) => ({ ...prevState, name }))
+  }
+
   return (
-    <App width={width}>
+    <App onClick={() => selectedPokemon(name)} width={width}>
       <LazyLoadImage
-        class="image"
+        className="image"
         src={src}
         alt={alt}
         placeholderSrc={altSrc}
