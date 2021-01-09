@@ -7,12 +7,17 @@ const App = styled.div`
 `
 
 const Heading = styled.h3`
+  font-weight: 500;
   margin: 0;
   text-align: center;
 `
 
 const SubHeading = styled.p`
-  margin: 0;
+  border-bottom: 2px black solid;
+  padding-bottom: 4px;
+  margin: 0 auto;
+  text-align: center;
+  width: 1rem;
 `
 
 export default function AppBar({ title, total }) {

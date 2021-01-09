@@ -4,7 +4,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component"
 import { PokemonContext } from "../contexts/PokemonContext"
 
 const App = styled.div`
-  min-height: 8rem;
+  height: 8.5rem;
   padding: 8px;
   position: relative;
   width: ${({ width }) => (width ? width : "50%")};
@@ -60,36 +60,59 @@ const Name = styled.p`
     border-bottom: solid 2px #10e879;
     content: "";
     display: block;
-    margin-top: 4px;
+    margin-top: 2px;
     transform: scaleX(0);
     transition: transform 0.3s ease-in-out;
   }
 `
 
+const Status = styled.div`
+  color: #17b2f0;
+  font-size: 12px;
+  text-align: center;
+  transform: translateY(-0.5rem);
+`
+
 export default function Card({
   alt,
+  id,
   src,
-  altSrc = "https://toppng.com/uploads/preview/pokeball-11530983183h69cddzgqu.png",
   name,
+  nickname = "",
+  effect = "black-and-white",
   width = "",
 }) {
-  const { setSelected, setPokemon } = useContext(PokemonContext)
-  const selectedPokemon = (name) => {
+  const { setSelected, setPokemon, pokemons } = useContext(PokemonContext)
+
+  const selectedPokemon = () => {
     setSelected(true)
-    setPokemon((prevState) => ({ ...prevState, name }))
+    setPokemon((prevState) => ({ ...prevState, id, name, src, nickname }))
+  }
+
+  const renderName = () => {
+    if (!nickname) return name
+    else return nickname
+  }
+
+  const renderStatus = () => {
+    const catched = pokemons.filter((item) => item.name === name)
+
+    if (catched.length > 0) return <Status>Catched</Status>
   }
 
   return (
-    <App onClick={() => selectedPokemon(name)} width={width}>
+    <App onClick={selectedPokemon} width={width}>
       <LazyLoadImage
         className="image"
+        effect={effect}
         src={src}
         alt={alt}
-        placeholderSrc={altSrc}
-        width="100%"
+        height="96px"
+        width="auto"
       />
       <BlurLight />
-      <Name>{name}</Name>
+      <Name>{renderName()}</Name>
+      {renderStatus()}
     </App>
   )
 }

@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   color: #5c5c5c;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -18,6 +23,11 @@ a {
   text-decoration: none;
 }
 
+button {
+  border: none;
+  outline: none;
+}
+
 .circle-button {
   background-color: #006097;
   border: 2px #6ff0c9 solid;
@@ -25,4 +35,140 @@ a {
   padding: 0;
   position: absolute;
   outline: none;
+}
+
+.lazy-load-image-background {
+  display: block !important;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.type-normal {
+  background-color: #BDBDAE;    
+}
+
+.type-poison {
+  background-color: #A75B9E;
+}
+
+.type-psychic {
+  background-color: #FA64B5;
+}
+
+.type-grass {
+  background-color: #87D24D;
+}
+
+.type-ground {
+  background-color: #E9C856;
+}
+
+.type-ice {
+  background-color: #96F1FF;
+}
+
+.type-fire {
+  background-color: #FA5543;
+}
+
+.type-rock {
+  background-color: #CCBB71;
+}
+
+.type-dragon {
+  background-color: #8874FF;
+}
+
+.type-water {
+  background-color: #56AEFF;
+}
+
+.type-bug {
+  background-color: #C2D21F;
+}
+
+.type-dark {
+  background-color: #886452;
+}
+
+.type-fighting {
+  background-color: #A75642;
+}
+
+.type-ghost {
+  background-color: #7874D5;
+}
+
+.type-steel {
+  background-color: #C4C2DB;
+}
+
+.type-flying {
+  background-color: #79A4FF;
+}
+
+.type-electric {
+  background-color: #FDE13A;
+}
+
+.type-fairy {
+  background-color: #F9ADFF;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    bottom: -100vh;
+  }
+  100% {
+    bottom: 0;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    bottom: 0;
+  }
+  100% {
+    bottom: -100vh;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    bottom: -100vh;
+  }
+  100% {
+    bottom: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    bottom: 0;
+  }
+  100% {
+    bottom: -100vh;
+  }
+}
+
+@media (min-width: 767px) {
+  body {
+    margin: 0 auto;
+    max-width: 500px;
+  }
+
+  .navigation-bar {
+    max-width: 500px;
+  }
 }

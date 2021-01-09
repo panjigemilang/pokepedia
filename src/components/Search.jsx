@@ -1,10 +1,11 @@
-import React, { useState } from "react"
+import { useContext, useState } from "react"
 import styled from "@emotion/styled"
+import { SearchContext } from "../contexts/SearchContext"
 
 const App = styled.div`
   align-items: center;
   display: flex;
-  padding: 16px;
+  padding: 8px 16px;
   position: relative;
   width: 100%;
 `
@@ -50,7 +51,7 @@ const BackButton = styled.i`
 `
 
 export default function Search() {
-  const [search, setSearch] = useState("")
+  const { search, setSearch } = useContext(SearchContext)
   const [focus, setFocus] = useState(false)
 
   const triggerFocus = () => setFocus(!focus)
