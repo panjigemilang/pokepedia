@@ -20,11 +20,11 @@ const SubHeading = styled.p`
   width: 1rem;
 `
 
-export default function AppBar({ title, total }) {
+export default function AppBar({ title, total = 0 }) {
   return (
     <App>
-      <Heading>{title}</Heading>
-      <SubHeading>{total}</SubHeading>
+      <Heading data-testid="qa-title">{title}</Heading>
+      <SubHeading data-testid="qa-total-pokemons">{total}</SubHeading>
     </App>
   )
 }
