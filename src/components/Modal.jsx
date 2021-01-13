@@ -1,8 +1,7 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { Overlay } from "../components/GeneralStyled"
 import styled from "@emotion/styled"
 import { PokemonContext } from "../contexts/PokemonContext"
-import { ToastContext } from "../contexts/ToastContext"
 import Fade from "../utils/Fade"
 
 const App = styled.div`
