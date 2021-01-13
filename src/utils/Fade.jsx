@@ -16,6 +16,7 @@ const Fade = ({ show, children }) => {
       <div
         style={{ animation: `${show ? "fadeIn" : "fadeOut"} .3s` }}
         onAnimationEnd={onAnimationEnd}
+        data-testid="qa-fade-container"
       >
         {children}
       </div>
