@@ -32,10 +32,10 @@ const App = styled.div`
 `
 
 const BlurLight = styled.span`
-  background: rgb(32, 212, 116);
+  background: ${({ theme }) => theme.colors.primary};
   background: radial-gradient(
     circle,
-    rgba(32, 212, 116, 1) 0%,
+    ${({ theme }) => theme.colors.secondary} 0%,
     rgba(0, 255, 239, 0.0032606792717086996) 0%
   );
   border-radius: 50%;
@@ -57,7 +57,7 @@ const Name = styled.p`
   width: max-content;
 
   &:after {
-    border-bottom: solid 2px #10e879;
+    border-bottom: solid 2px ${({ theme }) => theme.colors.secondary};
     content: "";
     display: block;
     margin-top: 2px;
@@ -67,7 +67,7 @@ const Name = styled.p`
 `
 
 const Status = styled.div`
-  color: #17b2f0;
+  color: ${({ theme }) => theme.textColors.info};
   font-size: 12px;
   text-align: center;
   transform: translateY(-0.5rem);

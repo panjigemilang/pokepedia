@@ -86,9 +86,9 @@ const CloseButton = styled.button`
 `
 
 const CloseIcon = styled.i`
-  border: 2px #10e8a7 solid;
+  border: 2px ${({ theme }) => theme.colors.secondary} solid;
   border-radius: 50%;
-  color: #10e8a7;
+  color: ${({ theme }) => theme.colors.secondary};
   font-size: 16px;
   height: 80%;
   width: 80%;
@@ -141,7 +141,7 @@ const Name = styled.h2`
 `
 
 const HpBar = styled.div`
-  background-color: #02daa4;
+  background-color: ${({ theme }) => theme.colors.common};
   border-radius: 20px;
   height: 4px;
   margin: 4px 0;
@@ -182,7 +182,7 @@ const Tab = styled.div`
     flex-wrap: wrap;
 
     p {
-      background-color: #46c298;
+      background-color: ${({ theme }) => theme.colors.common};
       border: 3px whitesmoke solid;
       border-radius: 20px;
       color: white;
@@ -203,6 +203,7 @@ export default function CardDetail() {
     setIsCatching,
     setIsEditNickname,
     setCatched,
+    inputNickname,
     setInputNickname,
   } = useContext(PokemonContext)
   const { setMessage, setToast } = useContext(ToastContext)
@@ -220,8 +221,9 @@ export default function CardDetail() {
   useEffect(() => {
     let timeout
 
+    // catching pokemon
     if (isCatching) {
-      const probability = 0
+      const probability = 0.5
 
       const catched = Math.random() > probability
 
@@ -230,6 +232,8 @@ export default function CardDetail() {
 
         if (catched) {
           setMessage("Catch succeed!")
+
+          setInputNickname(true)
         } else {
           setMessage("Catch failed, try again!")
         }
@@ -237,7 +241,6 @@ export default function CardDetail() {
         setIsCatching(false)
         // show toast and input nickname
         setToast(true)
-        setInputNickname(true)
       }, 20)
     }
 
@@ -251,8 +254,6 @@ export default function CardDetail() {
   }
 
   const releasePokemon = () => {
-    setCatched(true)
-
     let temp = pokemons
 
     // temp = temp.splice(pokemons.indexOf(pokemon.id), 1)
@@ -270,7 +271,6 @@ export default function CardDetail() {
   const editNickname = () => {
     setIsEditNickname(true)
     setInputNickname(true)
-    setCatched(true)
   }
 
   const renderNickname = () => {
@@ -366,7 +366,11 @@ export default function CardDetail() {
               </PokemonDetail>
             )}
             {location.pathname === "/" && (
-              <ActionButton className="circle-button" onClick={catchPokemon}>
+              <ActionButton
+                className="circle-button"
+                onClick={catchPokemon}
+                disabled={inputNickname}
+              >
                 <Image
                   src="https://cdn.pixabay.com/photo/2016/07/23/13/18/pokemon-1536849_960_720.png"
                   alt="Pokeball"
@@ -376,6 +380,7 @@ export default function CardDetail() {
             <CloseButton
               className="circle-button"
               onClick={() => setSelected(false)}
+              disabled={inputNickname}
             >
               <CloseIcon className="fas fa-times"></CloseIcon>
             </CloseButton>
@@ -384,6 +389,7 @@ export default function CardDetail() {
                 bgColor="transparent"
                 className="circle-button"
                 onClick={releasePokemon}
+                disabled={inputNickname}
               >
                 <Image src={ReleasePokemon} alt="Released Pokeball" />
               </ActionButton>

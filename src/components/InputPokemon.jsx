@@ -109,8 +109,8 @@ export default function InputPokemon() {
   }
 
   return (
-    <Fade show={inputNickname && catched}>
-      <App show={inputNickname && catched}>
+    <Fade show={inputNickname}>
+      <App show={inputNickname}>
         <Input
           ref={inputRef}
           type="text"

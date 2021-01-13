@@ -89,7 +89,8 @@ export default function PokeDex() {
   }
 
   if (loading) return <Loading />
-  if (error) return <h2>Something happened and we don't know</h2>
+  if (error)
+    return <h2>Something happened and when requesting Pokemons Lists</h2>
 
   return (
     <App>

@@ -3,9 +3,10 @@ import PokemonContextProvider from "./contexts/PokemonContext"
 import ToastContextProvider from "./contexts/ToastContext"
 import SearchContextProvider from "./contexts/SearchContext"
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client"
+import { jsx, ThemeProvider } from "@emotion/react"
 import "./App.css"
 
-// Components
+// UI Components
 import PokeDex from "./screens/PokeDex"
 import MyPokemons from "./screens/MyPokemons"
 import CardDetail from "./components/CardDetail"
@@ -18,27 +19,44 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 })
 
+const theme = {
+  colors: {
+    primary: "#FFD474",
+    secondary: "#10e879",
+    common: "#46c298",
+  },
+  toast: {
+    success: "#13c57b",
+    failed: "#d42c2c",
+  },
+  textColors: {
+    info: "#17b2f0",
+  },
+}
+
 function App() {
   return (
     <Router>
-      <ApolloProvider client={client}>
-        <PokemonContextProvider>
-          <ToastContextProvider>
-            <SearchContextProvider>
-              <Modal />
-              <Toast />
-              <CardDetail />
-              <NavigationBar />
-              <Switch>
-                <Route exact path="/" component={PokeDex} />
-              </Switch>
-              <Switch>
-                <Route exact path="/myPokemons" component={MyPokemons} />
-              </Switch>
-            </SearchContextProvider>
-          </ToastContextProvider>
-        </PokemonContextProvider>
-      </ApolloProvider>
+      <ThemeProvider theme={theme}>
+        <ApolloProvider client={client}>
+          <PokemonContextProvider>
+            <ToastContextProvider>
+              <SearchContextProvider>
+                <Modal />
+                <Toast />
+                <CardDetail />
+                <NavigationBar />
+                <Switch>
+                  <Route exact path="/" component={PokeDex} />
+                </Switch>
+                <Switch>
+                  <Route exact path="/myPokemons" component={MyPokemons} />
+                </Switch>
+              </SearchContextProvider>
+            </ToastContextProvider>
+          </PokemonContextProvider>
+        </ApolloProvider>
+      </ThemeProvider>
     </Router>
   )
 }

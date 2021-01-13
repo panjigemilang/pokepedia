@@ -5,7 +5,8 @@ import { PokemonContext } from "../contexts/PokemonContext"
 import Fade from "../utils/Fade"
 
 const App = styled.div`
-  background-color: ${({ catched }) => (catched ? "#13c57b" : "#d42c2c")};
+  background-color: ${({ catched, theme }) =>
+    catched ? theme.toast.success : theme.toast.failed};
   border-radius: 5px;
   box-shadow: 1px 5px 10px -2px rgba(0, 0, 0, 0.5);
   color: white;

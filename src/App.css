@@ -16,6 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 a {
@@ -25,6 +26,7 @@ a {
 
 button {
   border: none;
+  cursor: pointer;
   outline: none;
 }
 
