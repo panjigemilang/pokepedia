@@ -101,7 +101,7 @@ export default function Card({
   }
 
   return (
-    <App onClick={selectedPokemon} width={width}>
+    <App data-testid="qa-card" onClick={selectedPokemon} width={width}>
       <LazyLoadImage
         className="image"
         effect={effect}
@@ -111,7 +111,7 @@ export default function Card({
         width="auto"
       />
       <BlurLight />
-      <Name>{renderName()}</Name>
+      <Name data-testid="qa-title">{renderName()}</Name>
       {renderStatus()}
     </App>
   )

@@ -48,8 +48,6 @@ function App() {
                 <NavigationBar />
                 <Switch>
                   <Route exact path="/" component={PokeDex} />
-                </Switch>
-                <Switch>
                   <Route exact path="/myPokemons" component={MyPokemons} />
                 </Switch>
               </SearchContextProvider>

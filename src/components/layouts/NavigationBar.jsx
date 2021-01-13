@@ -42,13 +42,21 @@ export default function NavigationBar() {
 
   return (
     <App className="navigation-bar">
-      <Tab active={location.pathname === "/"} width={width}>
+      <Tab
+        data-testid="qa-pokedex-tab"
+        active={location.pathname === "/"}
+        width={width}
+      >
         <Link to="/">
           <img src={Pokedex} alt="Pokedex" />
           <p>PokeDex</p>
         </Link>
       </Tab>
-      <Tab active={location.pathname === "/myPokemons"} width={width}>
+      <Tab
+        data-testid="qa-my-pokemons-tab"
+        active={location.pathname === "/myPokemons"}
+        width={width}
+      >
         <Link to="/myPokemons">
           <img src={Pokeball} alt="Pokeball" />
           <p>My Pokemons</p>
