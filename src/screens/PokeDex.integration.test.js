@@ -19,15 +19,12 @@ jest.mock("react-router-dom", () => ({
 }))
 
 describe("<PokeDex />", () => {
-  let wrapper
-  // beforeEach(())
-
   afterAll(() => {
     jest.clearAllMocks()
   })
 
-  it("should catch pokemon properly", async () => {
-    wrapper = mount(
+  it("should be able to catch pokemon", async () => {
+    const wrapper = mount(
       <MockedProvider mocks={getPokemonsMock} addTypename={false}>
         <ThemeProvider theme={theme}>
           <PokemonContextProvider>
