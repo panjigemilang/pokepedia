@@ -389,6 +389,7 @@ export default function CardDetail() {
             </CloseButton>
             {location.pathname === "/myPokemons" && (
               <ActionButton
+                data-testid="qa-release-pokemon"
                 bgColor="transparent"
                 className="circle-button"
                 onClick={releasePokemon}

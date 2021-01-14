@@ -50,14 +50,6 @@ export default function InputPokemon() {
   const { setMessage, setToast } = useContext(ToastContext)
   const { setSearch } = useContext(SearchContext)
   const [nickname, setNickname] = useState("")
-  const inputRef = useRef(null)
-
-  useEffect(() => {
-    if (inputNickname && inputRef.current)
-      inputRef.current.focus({
-        preventScroll: true,
-      })
-  }, [inputNickname])
 
   const onEnter = (e) => {
     if (e.key === "Enter") onSubmit()
@@ -112,12 +104,12 @@ export default function InputPokemon() {
     <Fade show={inputNickname}>
       <App show={inputNickname}>
         <Input
-          ref={inputRef}
           type="text"
           onChange={(e) => setNickname(e.target.value)}
           onKeyUp={onEnter}
           value={nickname}
           placeholder="Nickname ..."
+          data-testid="qa-input-name"
         />
         <Button
           btnColor="#3e7afc"
