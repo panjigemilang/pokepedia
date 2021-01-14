@@ -34,6 +34,8 @@ const theme = {
   },
 }
 
+export { theme }
+
 function App() {
   return (
     <Router>

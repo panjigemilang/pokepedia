@@ -40,6 +40,8 @@ const GET_POKEMON = gql`
   }
 `
 
+export { GET_POKEMON }
+
 const App = styled.div`
   height: 100%;
   position: absolute;
@@ -241,7 +243,7 @@ export default function CardDetail() {
         setIsCatching(false)
         // show toast and input nickname
         setToast(true)
-      }, 20)
+      }, 2000)
     }
 
     return () => {
@@ -367,6 +369,7 @@ export default function CardDetail() {
             )}
             {location.pathname === "/" && (
               <ActionButton
+                data-testid="qa-catch-pokemon"
                 className="circle-button"
                 onClick={catchPokemon}
                 disabled={inputNickname}

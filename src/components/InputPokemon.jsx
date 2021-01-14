@@ -119,7 +119,11 @@ export default function InputPokemon() {
           value={nickname}
           placeholder="Nickname ..."
         />
-        <Button btnColor="#3e7afc" onClick={onSubmit}>
+        <Button
+          btnColor="#3e7afc"
+          onClick={onSubmit}
+          data-testid="qa-submit-nickname"
+        >
           <i className="fas fa-check"></i>
         </Button>
         <Button btnColor="#cf243b" onClick={() => setInputNickname(false)}>

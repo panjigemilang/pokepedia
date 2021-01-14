@@ -25,10 +25,16 @@ export default function Toast() {
   const { catched } = useContext(PokemonContext)
 
   useEffect(() => {
+    let toastTimeout
+
     if (toast)
-      setTimeout(() => {
+      toastTimeout = setTimeout(() => {
         setToast(false)
       }, 2000)
+
+    return () => {
+      clearTimeout(toastTimeout)
+    }
   }, [toast])
   return (
     <Fade show={toast}>

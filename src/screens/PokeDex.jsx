@@ -21,6 +21,8 @@ const GET_POKEMONS = gql`
   }
 `
 
+export { GET_POKEMONS }
+
 const App = styled.div`
   padding: 8px;
 `
@@ -89,8 +91,7 @@ export default function PokeDex() {
   }
 
   if (loading) return <Loading />
-  if (error)
-    return <h2>Something happened and when requesting Pokemons Lists</h2>
+  if (error) return <h2>{error}</h2>
 
   return (
     <App>

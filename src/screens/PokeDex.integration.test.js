@@ -1,32 +1,84 @@
-// import { ApolloProvider } from "@apollo/client"
-// import { mount } from "enzyme"
-// import { PokemonContext } from "../contexts/PokemonContext"
-// import PokeDex from "./PokeDex"
+import PokemonContextProvider from "../contexts/PokemonContext"
+import PokeDex from "./PokeDex"
+import CardDetail from "../components/CardDetail"
+import Toast from "../components/Toast"
+import { act } from "@testing-library/react"
+import { MockedProvider } from "@apollo/client/testing"
+import { mount } from "enzyme"
+import { ThemeProvider } from "@emotion/react"
+import { theme } from "../App"
+import ToastContextProvider from "../contexts/ToastContext"
+import SearchContextProvider from "../contexts/SearchContext"
+import { getPokemonsMock, getPokemonMock } from "../utils/testHelper"
 
-// describe("<PokeDex />", () => {
-//   let wrapper
-//   // beforeEach(())
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useLocation: () => ({
+    pathname: "/",
+  }),
+}))
 
-//   it('should catch pokemon', () => {
-//     const client = new ApolloClient({
-//       uri: "https://graphql-pokeapi.vercel.app/api/graphql",
-//       cache: new InMemoryCache(),
-//     })
+describe("<PokeDex />", () => {
+  let wrapper
+  // beforeEach(())
 
-//     const defaultValues = {
-//       pokemons: []
-//     }
+  afterAll(() => {
+    jest.clearAllMocks()
+  })
 
-//     wrapper = mount(
-//       <PokemonContext.Provider value={defaultValues}>
-//       <ApolloProvider client={client}>
-//         <PokeDex />
-//       </ApolloProvider>
-//       </PokemonContext.Provider>
-//     )
+  it("should catch pokemon properly", async () => {
+    wrapper = mount(
+      <MockedProvider mocks={getPokemonsMock} addTypename={false}>
+        <ThemeProvider theme={theme}>
+          <PokemonContextProvider>
+            <PokeDex />
+            <MockedProvider mocks={getPokemonMock} addTypename={false}>
+              <ToastContextProvider>
+                <SearchContextProvider>
+                  <CardDetail />
+                  <Toast />
+                </SearchContextProvider>
+              </ToastContextProvider>
+            </MockedProvider>
+          </PokemonContextProvider>
+        </ThemeProvider>
+      </MockedProvider>
+    )
 
-//     const card = wrapper.find("div[data-testid='qa-card']")
-//     card.simulate("click")
+    // await for GET_POKEMONS fetched
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0))
 
-//   })
-// })
+      wrapper.update()
+    })
+
+    // Card onclick
+    wrapper.find("div[data-testid='qa-card']").first().simulate("click")
+
+    // await for GET_POKEMON fetched
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0))
+
+      wrapper.update()
+    })
+
+    expect(
+      wrapper.find("CardDetail [data-testid='qa-fade-container']").exists()
+    ).toBe(true)
+
+    wrapper.find("button[data-testid='qa-catch-pokemon']").simulate("click")
+
+    // await for catching to be processed
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 3000))
+
+      wrapper.update()
+    })
+
+    expect(
+      wrapper.find("Toast [data-testid='qa-fade-container']").exists()
+    ).toBe(true)
+
+    wrapper.unmount()
+  })
+})
